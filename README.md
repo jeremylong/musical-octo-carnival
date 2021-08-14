@@ -166,7 +166,7 @@ utility. The OWASP dependency-check project uses the violations maven plugin;
 ### Act 4
 
 With Act 4 / [PR #4](https://github.com/jeremylong/musical-octo-carnival/pull/3)
-and implement AllStar. Hopefully, the maintainer will actually resolve the
+we implement AllStar. Hopefully, the maintainer will actually resolve the
 [issues](https://github.com/jeremylong/musical-octo-carnival/issues).
 
 ## Solutions
