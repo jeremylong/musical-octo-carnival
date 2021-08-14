@@ -163,6 +163,11 @@ length check enabled and anotate your PRs with the
 utility. The OWASP dependency-check project uses the violations maven plugin;
 [example here](https://github.com/jeremylong/DependencyCheck/blob/fc010a869aee54d7fd0357a95f9c5b2da2597363/.github/workflows/pull_requests.yml#L31).
 
+### Act 4
+
+With Act 4 / [PR #4](https://github.com/jeremylong/musical-octo-carnival/pull/3)
+and implement AllStar. Hopefully, the maintainer will actually resolve the
+[issues](https://github.com/jeremylong/musical-octo-carnival/issues).
 
 ## Solutions
 
