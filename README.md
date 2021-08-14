@@ -1,5 +1,4 @@
-Musical-Okto-Carnival
-=====================
+# Musical-Okto-Carnival
 
 GitHub actions by default allow any code executed as part of the action, except
 when running as part of a PR from a forked repository, to commit changes to the
@@ -12,8 +11,7 @@ have access to; this has only been strengthend in recent months due to
 However, by default an action running on a non-forked branch has write access
 to the respository.
 
-Attacking Repositories on GitHub
---------------------------------
+## Attacking Repositories on GitHub
 
 Imagine a scenario where a maintainer of a widely used OSS package goes rogue
 and decides they want to start spreading malicious code. For instance, if the
@@ -130,8 +128,9 @@ from the marketplace, or really any code that is executed withinva GitHub
 Action. Imagine the number of repositories that could be compromised if code
 like the example above were introduced into JUnit or other testing framework.
 
-In Action
----------
+## In Action
+
+### Act 1
 
 To see the payload in action, the code was added in
 [PR #1](https://github.com/jeremylong/musical-octo-carnival/pull/1).
@@ -143,8 +142,29 @@ was to mask the attack. The easiest would be to include a subverted dependency;
 one could even create a look-a-like/typo squated dependency to make it easier
 to introduce the code.
 
-Solutions
----------
+### Act 2
+
+With [PR #2](https://github.com/jeremylong/musical-octo-carnival/pull/2) the
+"malicious" code was cleaned up and the `warning.md` removed. Who needs that
+cumbersome branch protection.
+
+### Act 3
+
+In Act 3 / [PR #3](https://github.com/jeremylong/musical-octo-carnival/pull/3)
+the "malicious" code was re-introduced. This time discussed and completely
+missed during the peer review due to the Unified view not have any indication
+that there is code way off on the right starting at character 160. See the PR
+for the example. This is just another way malicious code can be introduced.
+
+If programming in a language that allows - it is recommended to use the "Split"
+view when reviewing a PR. Alternatively, use a tool like Checkstyle with a line
+length check enabled and anotate your PRs with the
+[Violations-to-GitHub-Comment](https://github.com/tomasbjerre/violation-comments-to-github-command-line)
+utility. The OWASP dependency-check project uses the violations maven plugin;
+[example here](https://github.com/jeremylong/DependencyCheck/blob/fc010a869aee54d7fd0357a95f9c5b2da2597363/.github/workflows/pull_requests.yml#L31).
+
+
+## Solutions
 
 GitHub already has (almost) everything in place a user needs to secure their
 repositories. Repository owners can enable branch protection or change the
@@ -180,8 +200,8 @@ two buttons to assist with resolution:
 1. Enable Branch Protection
 2. Change Default Permissions to read-only
 
-End Scene
----------
+## End Scene
 
 In summary, for now use [AllStars](https://github.com/ossf/allstar/blob/main/quick-start.md)
-and secure your GitHub repos.
+and secure your GitHub repos. When performing Peer Review - consider using
+the `Split` view or using some other tool to detect long lines.
