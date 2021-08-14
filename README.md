@@ -130,6 +130,19 @@ from the marketplace, or really any code that is executed withinva GitHub
 Action. Imagine the number of repositories that could be compromised if code
 like the example above were introduced into JUnit or other testing framework.
 
+In Action
+---------
+
+To see the payload in action, the code was added in
+[PR #1](https://github.com/jeremylong/musical-octo-carnival/pull/1).
+
+When run as part of the build of main the repository now has a `warning.md`.
+
+As the PR indicates, the "attack" was done in plain site. There are numerous
+was to mask the attack. The easiest would be to include a subverted dependency;
+one could even create a look-a-like/typo squated dependency to make it easier
+to introduce the code.
+
 Solutions
 ---------
 
