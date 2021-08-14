@@ -1,0 +1,21 @@
+name: Pulls
+
+on: 
+  pull_request:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest 
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        id: jdk-8
+        uses: actions/setup-java@v2
+        with:
+          java-version: 8
+          distribution: 'zulu'
+      - name: Build Snapshot with Maven
+        id: build-snapshot
+        run: mvn clean package test --no-transfer-progress --batch-mode
+
