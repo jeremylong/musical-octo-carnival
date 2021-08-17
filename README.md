@@ -184,7 +184,7 @@ you are doomed to fail. With AllStars we aren't just asking them to opt-in
 to security, but we are asking them to opt-in just for a notification.
 
 The best solution would be to make Actions secure by default. This could be
-done by changing the default permission level for GitHub Actions read-only.
+done by changing the default permission level for GitHub Actions to be read-only.
 Making this change would obviously be difficult as it would end up breaking
 a lot of builds. However, the default GitHub Action permissions on all new
 repositories created should be made read-only. In order to do this GitHub
