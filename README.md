@@ -1,6 +1,6 @@
 # Musical-Okto-Carnival
 
-GitHub actions by default allow any code executed as part of the action, except
+GitHub Actions by default allow any code executed as part of the action, except
 when running as part of a PR from a forked repository, to commit changes to the
 main branch. This is exceedingly dangerous and could allow the introduction of
 malicious code into the source code repositories of widely used software.
@@ -8,8 +8,11 @@ malicious code into the source code repositories of widely used software.
 GitHub provides repository owners a lot of control over what GitHub Actions
 have access to; this has only been strengthend in recent months due to
 [BitCoin mining attacks](https://www.coindesk.com/hackers-mined-crypto-on-githubs-servers-report).
-However, by default an action running on a non-forked branch has write access
-to the respository.
+However, one still must excersize a little caution and harden any repository
+that uses GitHub Actions.
+
+TL;DR - just install [AllStar](https://github.com/ossf/allstar/blob/main/quick-start.md)
+and follow the guidance.
 
 ## Attacking Repositories on GitHub
 
@@ -39,7 +42,7 @@ of dependency-check:
                 out.write("during the build, even code in third party dependencies called\n");
                 out.write("during testing, could subvert the integrity of your project.\n\n");
                 out.write("See [Disabling or limiting GitHub Actions for a repository]");
-                out.write("(https://docs.github.com/en/actions/reference/environment-variables#default-environment-variables) ");
+                out.write("(https://docs.github.com/en/github/administering-a-repository/managing-repository-settings/disabling-or-limiting-github-actions-for-a-repository) ");
                 out.write("for more information on how to protect you repository.");
                 out.flush();
                 out.close();
@@ -138,8 +141,8 @@ To see the payload in action, the code was added in
 When run as part of the build of main the repository now has a `warning.md`.
 
 As the PR indicates, the "attack" was done in plain site. There are numerous
-was to mask the attack. The easiest would be to include a subverted dependency;
-one could even create a look-a-like/typo squated dependency to make it easier
+ways to mask the attack. The easiest would be to include a subverted dependency;
+one could even create a look-a-like/typo-squated dependency to make it easier
 to introduce the code.
 
 ### Act 2
@@ -151,15 +154,14 @@ cumbersome branch protection.
 ### Act 3
 
 In Act 3 / [PR #3](https://github.com/jeremylong/musical-octo-carnival/pull/3)
-the "malicious" code was re-introduced. This time discussed and completely
+the "malicious" code was re-introduced. This time hidden and completely
 missed during the peer review due to the Unified view not have any indication
 that there is code way off on the right starting at character 160. See the PR
 for the example. This is just another way malicious code can be introduced.
 
-If programming in a language that allows - it is recommended to use the "Split"
-view when reviewing a PR. Alternatively, use a tool like Checkstyle with a line
-length check enabled and anotate your PRs with the
-[Violations-to-GitHub-Comment](https://github.com/tomasbjerre/violation-comments-to-github-command-line)
+It is recommended to use the "Split" view when reviewing a PR. Alternatively,
+use a tool like Checkstyle with a line length check enabled and anotate your
+PRs with the [Violations-to-GitHub-Comment](https://github.com/tomasbjerre/violation-comments-to-github-command-line)
 utility. The OWASP dependency-check project uses the violations maven plugin;
 [example here](https://github.com/jeremylong/DependencyCheck/blob/fc010a869aee54d7fd0357a95f9c5b2da2597363/.github/workflows/pull_requests.yml#L31).
 
@@ -176,12 +178,14 @@ repositories. Repository owners can enable branch protection or change the
 default permissions on Actions to be read-only via the workflow yaml or using
 a personal access token.
 
-The recent introduction of [AllStars](https://github.com/ossf/allstar/blob/main/quick-start.md)
-is awesome! AllStars will examine an organization or repository and alert
-if any issues are discovered. However, tools like AllStars require users to
+The recent introduction of [AllStar](https://github.com/ossf/allstar/blob/main/quick-start.md)
+is awesome! AllStar will examine an organization or repository and alert
+if any issues are discovered. However, tools like AllStar require users to
 opt-in. As anyone in security knows when you start asking people to opt-in
-you are doomed to fail. With AllStars we aren't just asking them to opt-in
-to security, but we are asking them to opt-in just for a notification.
+you are doomed to fail. With AllStar we aren't just asking them to opt-in
+to security, but we are asking them to opt-in just for a security notification.
+At least AllStar is persistent and will continue to ping until the [issue(s)
+are resolved](https://github.com/jeremylong/musical-octo-carnival/issues/6#issuecomment-903055210).
 
 The best solution would be to make Actions secure by default. This could be
 done by changing the default permission level for GitHub Actions read-only.
@@ -196,7 +200,7 @@ need the ability to write to a repository and for those that do one can
 simply add the write permission in the yaml defining the Action.
 
 Another solution available to GitHub would be to move the functionality of
-AllStars from an Action in the Marketplace to an integral part of GitHub
+AllStar from an Action in the Marketplace to an integral part of GitHub
 just like was done with dependabot. As such, all repository owners could
 be alerted, just like dependabot, if their repository is setup insecurely.
 The warnings could be displayed only to the repository owners and provide
@@ -207,6 +211,6 @@ two buttons to assist with resolution:
 
 ## End Scene
 
-In summary, for now use [AllStars](https://github.com/ossf/allstar/blob/main/quick-start.md)
+In summary, for now use [AllStar](https://github.com/ossf/allstar/blob/main/quick-start.md)
 and secure your GitHub repos. When performing Peer Review - consider using
 the `Split` view or using some other tool to detect long lines.
