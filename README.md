@@ -127,7 +127,7 @@ even check if the code was executing right after a merge event so maintainers
 would have to do a pull anyway before being able to update.
 
 The example code above could be introduced into any dependency, GitHub Action
-from the marketplace, or really any code that is executed withinva GitHub
+from the marketplace, or really any code that is executed within a GitHub
 Action. Imagine the number of repositories that could be compromised if code
 like the example above were introduced into JUnit or other testing framework.
 
